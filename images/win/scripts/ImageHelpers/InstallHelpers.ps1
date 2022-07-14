@@ -354,7 +354,7 @@ function Get-VSExtensionVersion
 
 function Get-ToolsetContent
 {
-    $toolsetPath = Join-Path "C:\\image" "toolset.json"
+    $toolsetPath = Join-Path "C:\\tmp\\vm-image" "toolset.json"
     $toolsetJson = Get-Content -Path $toolsetPath -Raw
     ConvertFrom-Json -InputObject $toolsetJson
 }
