@@ -4,9 +4,8 @@ root = true
 # The files are utf-8 encoded
 charset = utf-8
 # Use tabs for indentation
+# see https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/
 indent_style = tab
-# Use 2 spaces as indent
-indent_style = 2
 # Use Unix line endings
 end_of_line = lf
 # No whitespace at the end of line
@@ -18,3 +17,13 @@ insert_final_newline = true
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
 indent_size = 4
+
+# use 4 space indentation to stay inline with https://github.com/actions/virtual-environments/releases
+# so that when diffing and merging, I can ignore the whitespace/space/tab changes
+[*.{json, ps1}]
+indent_style = space
+indent_size = 4
+
+# 2 tab indentation
+[*.{hcl}]
+indent_size = 2
