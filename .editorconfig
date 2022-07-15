@@ -20,10 +20,12 @@ indent_size = 4
 
 # use 4 space indentation to stay inline with https://github.com/actions/virtual-environments/releases
 # so that when diffing and merging, I can ignore the whitespace/space/tab changes
-[*.{json, ps1}]
+[*.{json,ps1}]
 indent_style = space
-indent_size = 4
+indent_size = tab_width
+tab_width = 4
 
 # 2 tab indentation
-[*.{hcl}]
-indent_size = 2
+[template.pkr.hcl]
+indent_size = tab_width
+tab_width = 2

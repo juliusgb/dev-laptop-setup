@@ -95,125 +95,16 @@
         ]
     },
     "mingw": {
-	"version": "11.2.0.07112021"
+        "version": "11.2.0.07112021"
     },
     "MsysPackages": {
         "msys2": [],
         "mingw": []
     },
     "windowsFeatures": [
-        { "name": "Containers" },
         { "name": "Microsoft-Windows-Subsystem-Linux", "optionalFeature": true },
-        { "name": "VirtualMachinePlatform", "optionalFeature": true },
-        { "name": "NET-Framework-45-Features", "includeAllSubFeatures": true },
-        { "name": "Client-ProjFS", "optionalFeature": true },
-        { "name": "NET-Framework-Features", "includeAllSubFeatures": true }
+        { "name": "VirtualMachinePlatform", "optionalFeature": true }
     ],
-    "visualStudio": {
-        "version" : "2022",
-        "subversion" : "17",
-        "edition" : "Enterprise",
-        "channel": "release",
-        "workloads": [
-            "Component.Linux.CMake",
-            "Component.UnityEngine.x64",
-            "Component.Unreal.Android",
-            "Microsoft.Component.VC.Runtime.UCRTSDK",
-            "Microsoft.Net.Component.4.7.TargetingPack",
-            "Microsoft.Net.Component.4.7.2.TargetingPack",
-            "Microsoft.VisualStudio.Component.AspNet45",
-            "Microsoft.VisualStudio.Component.Azure.ServiceFabric.Tools",
-            "Microsoft.VisualStudio.Component.Debugger.JustInTime",
-            "Microsoft.VisualStudio.Component.EntityFramework",
-            "Microsoft.VisualStudio.Component.DslTools",
-            "Microsoft.VisualStudio.Component.LinqToSql",
-            "Microsoft.VisualStudio.Component.SQL.SSDT",
-            "Microsoft.VisualStudio.Component.Sharepoint.Tools",
-            "Microsoft.VisualStudio.Component.PortableLibrary",
-            "Microsoft.VisualStudio.Component.TeamOffice",
-            "Microsoft.VisualStudio.Component.TestTools.CodedUITest",
-            "Microsoft.VisualStudio.Component.TestTools.WebLoadTest",
-            "Microsoft.VisualStudio.Component.UWP.VC.ARM64",
-            "Microsoft.VisualStudio.Component.UWP.VC.ARM64EC",
-            "Microsoft.VisualStudio.Component.VC.CLI.Support",
-            "Microsoft.VisualStudio.Component.VC.CMake.Project",
-            "Microsoft.VisualStudio.Component.VC.DiagnosticTools",
-            "Microsoft.VisualStudio.Component.VC.Llvm.Clang",
-            "Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset",
-            "Microsoft.VisualStudio.Component.VC.Runtimes.ARM.Spectre",
-            "Microsoft.VisualStudio.Component.VC.Runtimes.ARM64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.Runtimes.ARM64EC.Spectre",
-            "Microsoft.VisualStudio.Component.VC.Runtimes.x86.x64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.TestAdapterForBoostTest",
-            "Microsoft.VisualStudio.Component.VC.TestAdapterForGoogleTest",
-            "Microsoft.VisualStudio.Component.VC.Tools.ARM",
-            "Microsoft.VisualStudio.Component.VC.MFC.ARM",
-            "Microsoft.VisualStudio.Component.VC.MFC.ARM.Spectre",
-            "Microsoft.VisualStudio.Component.VC.ATL.ARM64",
-            "Microsoft.VisualStudio.Component.VC.ATL.ARM64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.ATL.ARM64EC",
-            "Microsoft.VisualStudio.Component.VC.ATL.ARM64EC.Spectre",
-            "Microsoft.VisualStudio.Component.VC.MFC.ARM64",
-            "Microsoft.VisualStudio.Component.VC.MFC.ARM64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.MFC.ARM64EC",
-            "Microsoft.VisualStudio.Component.VC.MFC.ARM64EC.Spectre",
-            "Microsoft.VisualStudio.Component.VC.Modules.x86.x64",
-            "Microsoft.VisualStudio.Component.VC.Tools.ARM64",
-            "Microsoft.VisualStudio.Component.VC.Tools.ARM64EC",
-            "Microsoft.VisualStudio.Component.VC.Redist.MSM",
-            "Microsoft.VisualStudio.Component.VC.v141.x86.x64",
-            "Microsoft.VisualStudio.Component.VC.v141.x86.x64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.v141.ARM.Spectre",
-            "Microsoft.VisualStudio.Component.VC.v141.ARM64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.v141.MFC",
-            "Microsoft.VisualStudio.Component.VC.v141.MFC.Spectre",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.ARM",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.ARM.Spectre",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.ARM64",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.ARM64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64.Spectre",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.ATL",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.ATL.Spectre",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.MFC",
-            "Microsoft.VisualStudio.Component.VC.14.29.16.11.MFC.Spectre",
-            "Microsoft.VisualStudio.Component.VC.ATLMFC",
-            "Microsoft.VisualStudio.Component.VC.ATLMFC.Spectre",
-            "Microsoft.VisualStudio.Component.Windows10SDK.19041",
-            "Microsoft.VisualStudio.Component.Windows10SDK.20348",
-            "Microsoft.VisualStudio.Component.Windows11SDK.22000",
-            "Microsoft.VisualStudio.Component.Windows11SDK.22621",
-            "Microsoft.VisualStudio.Component.Workflow",
-            "Microsoft.VisualStudio.ComponentGroup.Azure.CloudServices",
-            "Microsoft.VisualStudio.ComponentGroup.Azure.ResourceManager.Tools",
-            "Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Llvm.Clang",
-            "Microsoft.VisualStudio.ComponentGroup.UWP.VC.v142",
-            "Microsoft.VisualStudio.ComponentGroup.Web.CloudTools",
-            "Microsoft.VisualStudio.Workload.Azure",
-            "Microsoft.VisualStudio.Workload.Data",
-            "Microsoft.VisualStudio.Workload.ManagedDesktop",
-            "Microsoft.VisualStudio.Workload.ManagedGame",
-            "Microsoft.VisualStudio.Workload.NativeCrossPlat",
-            "Microsoft.VisualStudio.Workload.NativeDesktop",
-            "Microsoft.VisualStudio.Workload.NativeGame",
-            "Microsoft.VisualStudio.Workload.NativeMobile",
-            "Microsoft.VisualStudio.Workload.NetCrossPlat",
-            "Microsoft.VisualStudio.Workload.NetWeb",
-            "Microsoft.VisualStudio.Workload.Node",
-            "Microsoft.VisualStudio.Workload.Office",
-            "Microsoft.VisualStudio.Workload.Python",
-            "Microsoft.VisualStudio.Workload.Universal",
-            "Microsoft.VisualStudio.Workload.VisualStudioExtension",
-            "Component.MDD.Linux",
-            "Component.MDD.Linux.GCC.arm",
-            "wasm.tools"
-        ],
-        "vsix": [
-            "VisualStudioClient.MicrosoftVisualStudio2022InstallerProjects",
-            "WixToolset.WixToolsetVisualStudio2022Extension",
-            "ProBITools.MicrosoftReportProjectsforVisualStudio2022"
-        ]
-    },
     "docker": {
         "images": [
             "mcr.microsoft.com/windows/servercore:ltsc2022",
@@ -256,28 +147,27 @@
         "common_packages": [
             { "name": "7zip.install" },
             { "name": "aria2" },
-            { "name": "azcopy10" },
-            { "name": "Bicep" },
             { "name": "innosetup" },
             { "name": "jq" },
             { "name": "NuGet.CommandLine" },
             {
                 "name": "openssl.light",
-                "args": [ "--version=1.1.1.20181020" ]
+                "args": [ "--version=3.0.4", "--params", "/InstallDir:C:\\opt\\openssl" ]
             },
             { "name": "packer" },
-            { "name": "strawberryperl" },
+            {
+                "name": "strawberryperl",
+                "args": [ "--install-arguments", "INSTALLDIR=\"C:\\opt\\Strawberryperl\"" ]
+            },
             { "name": "pulumi" },
-            { "name": "tortoisesvn" },
-            { "name": "swig" },
             { "name": "vswhere" },
             {
                 "name": "julia",
-                "args": [ "--ia", "/DIR=C:\\Julia" ]
+                "args": [ "--ia", "/DIR=C:\\opt\\Julia" ]
             },
             {
                 "name": "cmake.install",
-                "args": [ "--installargs", "ADD_CMAKE_TO_PATH=\"System\"" ]
+                "args": [ "--installargs", "ADD_CMAKE_TO_PATH=\"User\"" ]
             }
         ]
     },
