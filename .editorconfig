@@ -16,7 +16,8 @@ insert_final_newline = true
 [{Makefile*,**.mk}]
 # Use tabs for indentation (Makefiles require tabs)
 indent_style = tab
-indent_size = 4
+indent_size = tab_width
+tab_width = 4
 
 # use 4 space indentation to stay inline with https://github.com/actions/virtual-environments/releases
 # so that when diffing and merging, I can ignore the whitespace/space/tab changes
@@ -26,6 +27,6 @@ indent_size = tab_width
 tab_width = 4
 
 # 2 tab indentation
-[template.pkr.hcl]
+[*.pkr.hcl]
 indent_size = tab_width
 tab_width = 2

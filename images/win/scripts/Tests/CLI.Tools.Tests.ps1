@@ -12,9 +12,3 @@ Describe "AWS" {
         "sam --version" | Should -ReturnZeroExitCode
     }
 }
-
-Describe "GitHub CLI" {
-    It "gh" {
-        "gh --version" | Should -ReturnZeroExitCode
-    }
-}

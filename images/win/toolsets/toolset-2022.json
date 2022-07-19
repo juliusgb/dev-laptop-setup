@@ -37,17 +37,6 @@
             ]
         },
         {
-            "name": "PyPy",
-            "arch": "x86",
-            "platform" : "win64",
-            "versions": [
-                "2.7",
-                "3.7",
-                "3.8",
-                "3.9"
-            ]
-        },
-        {
             "name": "node",
             "url" : "https://raw.githubusercontent.com/actions/node-versions/main/versions-manifest.json",
             "arch": "x64",
@@ -120,10 +109,6 @@
             "cmd": "yamllint --version"
         }
     ],
-    "selenium": {
-        "version": "4",
-        "binary_name": "selenium-server"
-    },
     "npm": {
         "global_packages": [
             { "name": "yarn", "test": "yarn --version" },
@@ -132,16 +117,6 @@
             { "name": "gulp-cli", "test": "gulp --version" },
             { "name": "grunt-cli", "test": "grunt --version" }
         ]
-    },
-    "dotnet": {
-        "versions": [
-            "3.1",
-            "5.0"
-        ],
-        "tools": [
-            { "name": "nbgv", "test": "nbgv --version", "getversion": "nbgv --version" }
-        ],
-        "warmup": false
     },
     "choco": {
         "common_packages": [
@@ -173,21 +148,6 @@
     },
     "node": {
         "default": "16"
-    },
-    "mysql": {
-        "version": "8.0"
-    },
-    "mongodb": {
-        "version": "5.0"
-    },
-    "nsis": {
-        "version": "3.08"
-    },
-    "llvm": {
-        "version": "14"
-    },
-    "php": {
-        "version": "8.1"
     },
     "postgresql": {
         "version": "14"

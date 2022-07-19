@@ -1,14 +1,14 @@
 Import-Module (Join-Path $PSScriptRoot "..\SoftwareReport\SoftwareReport.Common.psm1") -DisableNameChecking
 
+# skipping because not installed yet
+Describe "R" -Skip {
+    It "Rscript" {
+        "Rscript --version" | Should -ReturnZeroExitCode
+    }
+}
 
-# Describe "R" {
-#     It "Rscript" {
-#         "Rscript --version" | Should -ReturnZeroExitCode
-#     }
-# }
 
-
-Describe "DotnetTLS" -Skip:(Test-IsWin22) {
+Describe "DotnetTLS" -Skip:((Test-IsWin22) -or (Test-IsWinHome)) {
     It "Tls 1.2 is enabled" {
         [Net.ServicePointManager]::SecurityProtocol -band "Tls12" | Should -Be Tls12
     }
@@ -36,6 +36,12 @@ Describe "PowerShell Core" {
     }
 }
 
+# skipping because msys2 is not installed yet
+Describe "Stack" -Skip {
+    It "Stack" {
+        "stack --version" | Should -ReturnZeroExitCode
+    }
+}
 
 Describe "Pipx" {
     It "Pipx" {

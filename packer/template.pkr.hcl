@@ -32,6 +32,21 @@ variable "image_data_file" {
   default = "C:\\tmp\\vm-image\\imagedata.json"
 }
 
+variable "image_version" {
+	type = string
+	default = "dev"
+}
+
+variable "opt_dir" {
+	type = string
+	default = "C:\\opt"
+}
+
+variable "repo_dir" {
+	type = string
+	default = "C:\\dev-work\\dev-laptop-windows"
+}
+
 source "null" basic-example {
   communicator = "winrm"
   winrm_host = "127.0.0.1"
@@ -85,7 +100,7 @@ build {
 
 	# TODO: restart machine
 
-	##	refresh shell to use env vars created from above scripts.
+	# refresh shell to use env vars created from above scripts.
 	provisioner "powershell" {
 		inline = ["refreshenv"]
 	}
@@ -97,14 +112,13 @@ build {
 			##	Other common utils, Git
 			#########################################################################
 			"./images/win/scripts/Installers/Install-PowershellCore.ps1",
-			"./images/win/scripts/Installers/Install-CommonUtils.ps1",
-			"./images/win/scripts/Installers/Install-Git.ps1"
+			"./images/win/scripts/Installers/Install-CommonUtils.ps1"
 		]
 	}
 
-	# TODO: restart machine
+	# restart machine
 
-	##	refresh shell to use env vars created from above scripts.
+	# refresh shell to use env vars created from above scripts.
 	provisioner "powershell" {
     inline = ["refreshenv"]
   }
@@ -128,75 +142,91 @@ build {
     inline = ["refreshenv"]
   }
 
-	# provisioner "powershell" {
-	# 	execution_policy = "unrestricted"
-	# 	scripts          = [
-	# 		#########################################################################
-	# 		##	Others
-	# 		#########################################################################
-	# 		# "./images/win/scripts/Installers/Install-Ruby.ps1",
-	# 		# "./images/win/scripts/Installers/Install-PyPy.ps1",
-  #     # "./images/win/scripts/Installers/Install-Toolset.ps1",
-  #     # "./images/win/scripts/Installers/Configure-Toolset.ps1",
-  #     # "./images/win/scripts/Installers/Install-NodeLts.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Pipx.ps1",
-  #     # "./images/win/scripts/Installers/Install-PipxPackages.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Chrome.ps1",
-  #     # "./images/win/scripts/Installers/Install-Edge.ps1",
-  #     # "./images/win/scripts/Installers/Install-Firefox.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Selenium.ps1",
-  #     # "./images/win/scripts/Installers/Install-IEWebDriver.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Apache.ps1",
-  #     # "./images/win/scripts/Installers/Install-Nginx.ps1",
-	# 		# "./images/win/scripts/Installers/Install-AWS.ps1",
-	# 		# "./images/win/scripts/Installers/Install-MysqlCli.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Mingw64.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Haskell.ps1",
-	# 		# "./images/win/scripts/Installers/Install-Miniconda.ps1",
-	# 		# "./images/win/scripts/Installers/Install-PostgreSQL.ps1"
-	# 	]
-	# }
+	provisioner "powershell" {
+		environment_vars = [
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+		]
+		execution_policy = "unrestricted"
+		scripts          = [
+			#########################################################################
+			##	Others
+			#########################################################################
+			"./images/win/scripts/Installers/Install-Ruby.ps1",
+#			"./images/win/scripts/Installers/Install-PyPy.ps1", # doesn't create Scripts dir for py version 3.8 and 3.9
+      "./images/win/scripts/Installers/Install-Toolset.ps1",
+      "./images/win/scripts/Installers/Configure-Toolset.ps1",
+      "./images/win/scripts/Installers/Install-NodeLts.ps1",
+			"./images/win/scripts/Installers/Install-Pipx.ps1",
+      "./images/win/scripts/Installers/Install-PipxPackages.ps1",
+				"./images/win/scripts/Installers/Install-Git.ps1"
+			"./images/win/scripts/Installers/Install-Apache.ps1",
+      "./images/win/scripts/Installers/Install-Nginx.ps1",
+			"./images/win/scripts/Installers/Install-AWS.ps1",
+			"./images/win/scripts/Installers/Install-Mingw64.ps1",
+			"./images/win/scripts/Installers/Install-Miniconda.ps1",
+			"./images/win/scripts/Installers/Install-PostgreSQL.ps1",
+			## someday/maybe list ##
+			#"./images/win/scripts/Installers/Install-Rust.ps1",
+			# ./images/win/scripts/Installers/Install-R.ps1
+			#"./images/win/scripts/Installers/Install-Msys2.ps1", # required for haskell
+			# "./images/win/scripts/Installers/Install-Haskell.ps1",
+			# "./images/win/scripts/Installers/Install-Stack.ps1",
+			# browsers and their selenium drivers
+			# "./images/win/scripts/Installers/Install-Chrome.ps1",
+			# "./images/win/scripts/Installers/Install-Edge.ps1",
+      # "./images/win/scripts/Installers/Install-Firefox.ps1",
+			# "./images/win/scripts/Installers/Install-Selenium.ps1",
+      # "./images/win/scripts/Installers/Install-IEWebDriver.ps1"
+		]
+	}
 
-	# provisioner "powershell" {
-	# 	execution_policy = "unrestricted"
-	# 	scripts          = [
-	# 		#########################################################################
-	# 		##	Others
-	# 		#########################################################################
-	# 		"{{ template_dir }}/scripts/Installers/Configure-Shell.ps1",
-	# 	]
-	# }
-	# # restart
-	# provisioner "powershell" {
-  #   inline = ["refreshenv"]
-  # }
+	provisioner "powershell" {
+		execution_policy = "unrestricted"
+		scripts          = [
+			#########################################################################
+			##	Others
+			#########################################################################
+			"./images/win/scripts/Installers/Configure-Shell.ps1"
+		]
+	}
 
-	# provisioner "powershell" {
-	# 	execution_policy = "unrestricted"
-	# 	scripts          = [
-	# 		#########################################################################
-	# 		##	Others
-	# 		#########################################################################
-	# 		"{{ template_dir }}/scripts/Tests/RunAll-Tests.ps1"
-	# 	]
-	# }
+	# restart
 
-	# provisioner "powershell" {
-  #   inline = ["if (-not (Test-Path {{user `image_folder`}}\\Tests\\testResults.xml)) { throw '{{user `image_folder`}}\\Tests\\testResults.xml not found' }"]
-  # }
+	provisioner "powershell" {
+    inline = ["refreshenv"]
+  }
 
-	# provisioner "powershell" {
-	# 	environment_vars = [
-	# 		"IMAGE_VERSION=${var.image_version}"
-	# 	]
-  #   inline["pwsh -File '{{user `image_folder`}}\\SoftwareReport\\SoftwareReport.Generator.ps1'"]
-  # }
+	provisioner "powershell" {
+		environment_vars = [
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+		]
+		execution_policy = "unrestricted"
+		scripts          = [
+			#########################################################################
+			##	Others
+			#########################################################################
+			"./images/win/scripts/Tests/RunAll-Tests.ps1"
+		]
+	}
 
-	# provisioner "powershell" {
-	# 	environment_vars = [
-	# 		"IMAGE_VERSION=${var.image_version}"
-	# 	]
-  #   inline["if (-not (Test-Path C:\\InstalledSoftware.md)) { throw 'C:\\InstalledSoftware.md not found' }"]
-  # }
+	provisioner "powershell" {
+		inline = ["if (-not (Test-Path ${var.image_folder}\\Tests\\testResults.xml)) { throw '${var.image_folder}\\Tests\\testResults.xml not found' }"]
+  }
+
+	provisioner "powershell" {
+		environment_vars = [
+			"IMAGE_VERSION=${var.image_version}",
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+		]
+		inline = ["pwsh -File '${var.image_folder}\\SoftwareReport\\SoftwareReport.Generator.ps1'"]
+  }
+
+	provisioner "powershell" {
+		inline = ["if (-not (Test-Path ${var.opt_dir}\\InstalledSoftware.md)) { throw '${var.opt_dir}\\InstalledSoftware.md not found' }"]
+  }
+
+	provisioner "powershell" {
+		inline = ["Copy-Item -Force ${var.opt_dir}\\InstalledSoftware.md -Destination ${var.repo_dir}\\images\\win\\Windows2022ish-Readme.md"]
+  }
 
 }
