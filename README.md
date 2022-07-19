@@ -41,12 +41,13 @@ There's no one script (yet) to bootstrap everything.
 To test manually, do the following:
 
 1. Setup `winrm`. In PowerShell, run `.\winrm\SetupWinRmForPacker.ps1`
-2. Validate the packer template file with `C:\path\to\packer.exe validate packer\template.pkr.hcl`
-3. Packer build the template file with `C:\path\to\packer.exe build packer\template.pkr.hcl`.
-:zap: Read the section "more on step 3" :zap:
-4. Cleanup what was added during the `winrm` setup. In PowerShell, run `.\winrm\CleanupWinrmSetupForPacker.ps1`
+2. Validate the packer template file with `C:\path\to\packer.exe validate packer\template.pkr.hcl`.
+3. Add username and password in the Packer template file under `winrm-username` and `winrm-password`.
+4. Packer build the template file with `C:\path\to\packer.exe build packer\template.pkr.hcl`.
+:zap: Read the section "more on step 4" :zap:
+5. Cleanup what was added during the `winrm` setup. In PowerShell, run `.\winrm\CleanupWinrmSetupForPacker.ps1`
 
-### More on step 3
+### More on step 4
 
 Changes to the packer template file mean re-running `packer build`.
 That's a once-for-all operation: there are no intermediate caches for previous steps to use again.
