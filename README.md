@@ -95,8 +95,8 @@ Because of excluded tooling, customized installers, I've added the `-ish` suffix
 ## References
 
 - Setting up WinRM and manually testing it - https://til.juliusgamanyi.com/posts/setup-winrm
-- Setup Packer with WinRM - https://til.juliusgamanyi.com/posts/setup-local-dev-with-packer
-- Use Packer to install dev tooling - https://til.juliusgamanyi.com/posts/use-packer-to-install-tools-on-dev-machine
+- Setup Packer with WinRM - https://til.juliusgamanyi.com/posts/packer-winrm-setup
+- Use Packer to install dev tooling - https://til.juliusgamanyi.com/posts/setup-local-dev-with-packer
 - Virtual machines for GitHub Actions - https://github.com/actions/virtual-environments
 - Best script was `Configure-Toolset.ps1`. It's idempotent.
 It checked the directories and registry keys, deleting them, if they already exist.
