@@ -87,9 +87,6 @@ build {
 	provisioner "powershell" {
 		execution_policy = "unrestricted"
 		scripts          = [
-			#########################################################################
-			##	Install base modules and utilities
-			#########################################################################
 			"./images/win/scripts/Installers/Install-PowerShellModules.ps1",
 			"./images/win/scripts/Installers/Install-WindowsFeatures.ps1",
 			"./images/win/scripts/Installers/Install-Choco.ps1",
@@ -108,9 +105,6 @@ build {
 	provisioner "powershell" {
 		execution_policy = "unrestricted"
 		scripts          = [
-			#########################################################################
-			##	Other common utils, Git
-			#########################################################################
 			"./images/win/scripts/Installers/Install-PowershellCore.ps1",
 			"./images/win/scripts/Installers/Install-CommonUtils.ps1"
 		]
@@ -129,9 +123,6 @@ build {
 		]
 		execution_policy = "unrestricted"
 		scripts          = [
-			#########################################################################
-			##	Java, Kotlin
-			#########################################################################
 			"./images/win/scripts/Installers/Install-JavaTools.ps1",
 			"./images/win/scripts/Installers/Install-Kotlin.ps1"
 		]
@@ -148,9 +139,6 @@ build {
 		]
 		execution_policy = "unrestricted"
 		scripts          = [
-			#########################################################################
-			##	Others
-			#########################################################################
 			"./images/win/scripts/Installers/Install-Ruby.ps1",
 #			"./images/win/scripts/Installers/Install-PyPy.ps1", # doesn't create Scripts dir for py version 3.8 and 3.9
       "./images/win/scripts/Installers/Install-Toolset.ps1",
@@ -170,22 +158,13 @@ build {
 			# ./images/win/scripts/Installers/Install-R.ps1
 			#"./images/win/scripts/Installers/Install-Msys2.ps1", # required for haskell
 			# "./images/win/scripts/Installers/Install-Haskell.ps1",
-			# "./images/win/scripts/Installers/Install-Stack.ps1",
-			# browsers and their selenium drivers
-			# "./images/win/scripts/Installers/Install-Chrome.ps1",
-			# "./images/win/scripts/Installers/Install-Edge.ps1",
-      # "./images/win/scripts/Installers/Install-Firefox.ps1",
-			# "./images/win/scripts/Installers/Install-Selenium.ps1",
-      # "./images/win/scripts/Installers/Install-IEWebDriver.ps1"
+			# "./images/win/scripts/Installers/Install-Stack.ps1"
 		]
 	}
 
 	provisioner "powershell" {
 		execution_policy = "unrestricted"
 		scripts          = [
-			#########################################################################
-			##	Others
-			#########################################################################
 			"./images/win/scripts/Installers/Configure-Shell.ps1"
 		]
 	}
@@ -202,9 +181,6 @@ build {
 		]
 		execution_policy = "unrestricted"
 		scripts          = [
-			#########################################################################
-			##	Others
-			#########################################################################
 			"./images/win/scripts/Tests/RunAll-Tests.ps1"
 		]
 	}
