@@ -1,0 +1,159 @@
+{
+    "toolcache": [
+        {
+            "name": "Ruby",
+            "arch": "x64",
+            "platform" : "win32",
+            "versions": [
+                "2.7",
+                "3.0",
+                "3.1"
+            ],
+            "default": "3.0"
+        },
+        {
+            "name": "Python",
+            "url" : "https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json",
+            "arch": "x64",
+            "platform" : "win32",
+            "versions": [
+                "3.7.*",
+                "3.8.*",
+                "3.9.*",
+                "3.10.*"
+            ],
+            "default": "3.9.*"
+        },
+        {
+            "name": "Python",
+            "url" : "https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json",
+            "arch": "x86",
+            "platform" : "win32",
+            "versions": [
+                "3.7.*",
+                "3.8.*",
+                "3.9.*",
+                "3.10.*"
+            ]
+        },
+        {
+            "name": "node",
+            "url" : "https://raw.githubusercontent.com/actions/node-versions/main/versions-manifest.json",
+            "arch": "x64",
+            "platform" : "win32",
+            "versions": [
+                "12.*",
+                "14.*",
+                "16.*"
+            ]
+        },
+        {
+            "name": "go",
+            "url" : "https://raw.githubusercontent.com/actions/go-versions/main/versions-manifest.json",
+            "arch": "x64",
+            "platform" : "win32",
+            "versions": [
+                "1.16.*",
+                "1.17.*",
+                "1.18.*"
+            ],
+            "default": "1.17.*"
+        }
+    ],
+    "powershellModules": [
+        { "name": "DockerMsftProvider" },
+        { "name": "MarkdownPS" },
+        { "name": "Pester" },
+        { "name": "PowerShellGet" },
+        { "name": "PSScriptAnalyzer" },
+        { "name": "PSWindowsUpdate" },
+        {"name": "AWSPowershell"}
+    ],
+    "java": {
+        "default": "11",
+        "default_vendor": "Temurin-Hotspot",
+        "vendors": [
+            {
+                "name": "Temurin-Hotspot",
+                "versions": [ "8", "11", "17" ]
+            },
+            {
+                "name": "Adopt",
+                "versions": [ "8", "11"]
+            }
+        ]
+    },
+    "mingw": {
+        "version": "11.2.0.07112021"
+    },
+    "MsysPackages": {
+        "msys2": [],
+        "mingw": []
+    },
+    "windowsFeatures": [
+        { "name": "Microsoft-Windows-Subsystem-Linux", "optionalFeature": true },
+        { "name": "VirtualMachinePlatform", "optionalFeature": true }
+    ],
+    "docker": {
+        "images": [
+            "mcr.microsoft.com/windows/servercore:ltsc2022",
+            "mcr.microsoft.com/windows/nanoserver:ltsc2022",
+            "mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022",
+            "mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2022",
+            "mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2022"
+        ]
+    },
+    "pipx": [
+        {
+            "package": "yamllint",
+            "cmd": "yamllint --version"
+        }
+    ],
+    "npm": {
+        "global_packages": [
+            { "name": "yarn", "test": "yarn --version" },
+            { "name": "newman", "test": "newman --version" },
+            { "name": "lerna", "test": "lerna --version" },
+            { "name": "gulp-cli", "test": "gulp --version" },
+            { "name": "grunt-cli", "test": "grunt --version" }
+        ]
+    },
+    "choco": {
+        "common_packages": [
+            { "name": "7zip.install" },
+            { "name": "aria2" },
+            { "name": "innosetup" },
+            { "name": "jq" },
+            { "name": "NuGet.CommandLine" },
+            {
+                "name": "openssl.light",
+                "args": [ "--version=3.0.4", "--params", "/InstallDir:C:\\opt\\openssl" ]
+            },
+            { "name": "packer" },
+            {
+                "name": "strawberryperl",
+                "args": [ "--install-arguments", "INSTALLDIR=\"C:\\opt\\Strawberryperl\"" ]
+            },
+            { "name": "pulumi" },
+            { "name": "vswhere" },
+            {
+                "name": "julia",
+                "args": [ "--ia", "/DIR=C:\\opt\\Julia" ]
+            },
+            {
+                "name": "cmake.install",
+                "args": [ "--installargs", "ADD_CMAKE_TO_PATH=\"User\"" ]
+            }
+        ]
+    },
+    "node": {
+        "default": "16"
+    },
+    "postgresql": {
+        "version": "14"
+    },
+    "kotlin": {
+        "version": "latest",
+        "binary_name": "kotlin-compiler"
+    }
+}
