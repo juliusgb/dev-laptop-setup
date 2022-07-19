@@ -205,4 +205,11 @@ build {
 		inline = ["Copy-Item -Force ${var.opt_dir}\\InstalledSoftware.md -Destination ${var.repo_dir}\\images\\win\\Windows2022ish-Readme.md"]
   }
 
+	provisioner "powershell" {
+		execution_policy = "unrestricted"
+		scripts          = [
+			"./images/win/scripts/Installers/Finalize-VM.ps1"
+		]
+	}
+
 }

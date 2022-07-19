@@ -5,7 +5,7 @@ Automatically installs developer tools on a Windows machine.
 The list of tools are <https://github.com/juliusgb/dev-laptop-windows/blob/main/images/win/Windows2022ish-Readme.md>.
 
 That's a subset of the tools that Microsoft installs on [its virtual machines](https://github.com/actions/virtual-environments) on which GitHub Actions run.
-I wanted something similar, i.e., open a shell, execute commands to run programs without having first to worry about installing and configuring the tools/SDKs/Runtimes. That worry comes later.
+I wanted something similar, i.e., open a shell, execute commands to experiment without having first to worry about installing and configuring the tools/SDKs/Runtimes. That worry comes later.
 
 I'm using release [`Windows Server 2022 (20220710 update)`](https://github.com/actions/virtual-environments/releases/tag/win22%2F20220710.1).
 But I've removed server-specific settings and tools, such as [`sbt`](https://www.scala-sbt.org/), that I'm not likely to use.
