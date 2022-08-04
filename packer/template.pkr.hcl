@@ -149,6 +149,8 @@ build {
 				"./images/win/scripts/Installers/Install-Git.ps1"
 			"./images/win/scripts/Installers/Install-Apache.ps1",
       "./images/win/scripts/Installers/Install-Nginx.ps1",
+			# required for haskell, building ruby gem native extensions (for jekyll)
+			"./images/win/scripts/Installers/Install-Msys2.ps1",
 			"./images/win/scripts/Installers/Install-AWS.ps1",
 			"./images/win/scripts/Installers/Install-Mingw64.ps1",
 			"./images/win/scripts/Installers/Install-Miniconda.ps1",
@@ -156,7 +158,6 @@ build {
 			## someday/maybe list ##
 			#"./images/win/scripts/Installers/Install-Rust.ps1",
 			# ./images/win/scripts/Installers/Install-R.ps1
-			#"./images/win/scripts/Installers/Install-Msys2.ps1", # required for haskell
 			# "./images/win/scripts/Installers/Install-Haskell.ps1",
 			# "./images/win/scripts/Installers/Install-Stack.ps1"
 		]

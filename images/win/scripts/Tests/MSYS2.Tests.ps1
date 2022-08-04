@@ -1,10 +1,9 @@
 BeforeAll {
-    $msys2Dir = "C:\opt\msys64\usr\bin"
+    $msys2Dir = "C:\opt\msys2\usr\bin"
     $originalPath = $env:PATH
 }
 
-# skipping because msys2 is not installed yet
-Describe "MSYS2 packages" -Skip {
+Describe "MSYS2 packages" {
     BeforeEach {
         $env:PATH = "$msys2Dir;$env:PATH"
     }
@@ -41,7 +40,7 @@ $mingwTypes = (Get-ToolsetContent).MsysPackages.mingw
 foreach ($mingwType in $mingwTypes) {
     Describe "$($mingwType.arch) packages" {
         $tools = $mingwType.runtime_packages
-        $execDir = Join-Path "C:\opt\msys64" $mingwType.exec_dir | Join-Path -ChildPath "bin"
+        $execDir = Join-Path "C:\opt\msys2" $mingwType.exec_dir | Join-Path -ChildPath "bin"
 
         foreach ($tool in $tools) {
             Context "$($tool.name) package"{

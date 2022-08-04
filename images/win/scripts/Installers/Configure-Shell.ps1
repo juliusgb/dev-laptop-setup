@@ -9,7 +9,7 @@ setlocal
 IF NOT DEFINED MSYS2_PATH_TYPE set MSYS2_PATH_TYPE=strict
 IF NOT DEFINED MSYSTEM set MSYSTEM=mingw64
 set CHERE_INVOKING=1
-C:\opt\msys64\usr\bin\bash.exe -leo pipefail %*
+C:\opt\msys2\usr\bin\bash.exe -leo pipefail %*
 '@ | Out-File -FilePath "$shellPath\msys2bash.cmd" -Encoding ascii
 
 # gitbash <--> C:\Program Files\Git\bin\bash.exe
