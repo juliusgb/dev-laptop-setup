@@ -22,7 +22,7 @@ function Install-Msys2 {
 
   # extract tar.xz to C:\
   Write-Host "Starting msys2 installation"
-  & $msys2File in --confirm-command --accept-messages --root C:/opt/msys64
+  & $msys2File in --confirm-command --accept-messages --root C:/opt/msys2
   Remove-Item $msys2File
 }
 
@@ -73,7 +73,7 @@ function Install-MingwPackages($Packages) {
 Install-Msys2
 
 # Add msys2 bin tools folders to PATH temporary
-$env:PATH = "C:\opt\msys64\mingw64\bin;C:\opt\msys64\usr\bin;$origPath"
+$env:PATH = "C:\opt\msys2\mingw64\bin;C:\opt\msys2\usr\bin;$origPath"
 
 Write-Host "`n$dash pacman --noconfirm -Syyuu"
 pacman.exe -Syyuu --noconfirm
