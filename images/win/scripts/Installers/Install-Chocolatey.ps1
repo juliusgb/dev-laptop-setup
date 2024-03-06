@@ -1,3 +1,8 @@
+################################################################################
+##  File:  Install-Chocolatey.ps1
+##  Desc:  Install Chocolatey package manager
+################################################################################
+
 Write-Host "Set TLS1.2"
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
@@ -18,7 +23,13 @@ if ($userPath) {
 }
 
 # Run the installer
-Invoke-Expression ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+# Invoke-Expression ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+
+# Verify and run choco installer
+$signatureThumbprint = "83AC7D88C66CB8680BCE802E0F0F5C179722764B"
+$installScriptPath = Invoke-DownloadWithRetry 'https://chocolatey.org/install.ps1'
+Test-FileSignature -Path $installScriptPath -ExpectedThumbprint $signatureThumbprint
+Invoke-Expression $installScriptPath
 
 # Turn off confirmation
 choco feature enable -n allowGlobalConfirmation

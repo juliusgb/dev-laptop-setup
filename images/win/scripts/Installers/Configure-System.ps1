@@ -1,6 +1,6 @@
 ################################################################################
-##  File:  Finalize-VM.ps1
-##  Desc:  Clean up temp folders after installs to save space
+##  File:  Configure-System.ps1
+##  Desc:  Applies various configuration settings to the final image
 ################################################################################
 
 Write-Host "Clean up various directories"
@@ -19,6 +19,13 @@ Write-Host "Clean up various directories"
 
 # Clean yarn and npm cache
 cmd /c "yarn cache clean 2>&1" | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    throw "Failed to clean yarn cache"
+}
+
 cmd /c "npm cache clean --force 2>&1" | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    throw "Failed to clean npm cache"
+}
 
 Write-Host "Finalize-VM.ps1 - completed"
