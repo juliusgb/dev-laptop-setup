@@ -1,8 +1,8 @@
 Describe "PostgreSQL" {
     $psqlTests = @(
-        @{envVar = "PGROOT"; pgPath = Get-EnvironmentVariable "PGROOT"}
-        @{envVar = "PGBIN"; pgPath = Get-EnvironmentVariable "PGBIN"}
-        @{envVar = "PGDATA"; pgPath = Get-EnvironmentVariable "PGDATA"}
+        @{envVar = "PGROOT"; pgPath = Get-EnvironmentVariable "PGROOT" }
+        @{envVar = "PGBIN"; pgPath = Get-EnvironmentVariable "PGBIN" }
+        @{envVar = "PGDATA"; pgPath = Get-EnvironmentVariable "PGDATA" }
     )
 
     Context "Environment variable" {
@@ -28,8 +28,8 @@ Describe "PostgreSQL" {
     Context "Service" {
         $psqlService = Get-Service -Name postgresql*
         $psqlServiceTests = @{
-            Name = $psqlService.Name
-            Status = $psqlService.Status
+            Name      = $psqlService.Name
+            Status    = $psqlService.Status
             StartType = $psqlService.StartType
         }
 
@@ -46,9 +46,16 @@ Describe "PostgreSQL" {
         It "PostgreSQL version should correspond to the version in the toolset" {
             $toolsetVersion = (Get-ToolsetContent).postgresql.version
             # Client version
-            (&$Env:PGBIN\psql --version).split()[-1] | Should -BeLike "$toolsetVersion*"
+            (& $env:PGBIN\psql --version).split()[-1] | Should -BeLike "$toolsetVersion*"
             # Server version
-            (&$Env:PGBIN\pg_config --version).split()[-1] | Should -BeLike "$toolsetVersion*"
+            (& $env:PGBIN\pg_config --version).split()[-1] | Should -BeLike "$toolsetVersion*"
         }
+    }
+}
+
+Describe "MySQL" -Skip {
+    It "MySQL CLI" {
+        $MysqlVersion = (Get-ToolsetContent).mysql.version
+        mysql -V | Should -BeLike "*${MysqlVersion}*"
     }
 }

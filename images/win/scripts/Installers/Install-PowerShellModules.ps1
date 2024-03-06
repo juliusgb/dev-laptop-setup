@@ -1,3 +1,8 @@
+################################################################################
+##  File:  Install-PowershellModules.ps1
+##  Desc:  Install common PowerShell modules
+################################################################################
+
 # Set TLS1.2
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor "Tls12"
 
@@ -22,11 +27,11 @@ foreach($module in $modules)
             Write-Host " - $version"
             Install-Module -Name $moduleName -RequiredVersion $version -Scope AllUsers -SkipPublisherCheck -Force
         }
-        continue
+    } else {
+        Install-Module -Name $moduleName -Scope AllUsers -SkipPublisherCheck -Force
     }
-
-    Install-Module -Name $moduleName -Scope AllUsers -SkipPublisherCheck -Force
 }
 
+Uninstall-Module -Name Pester
 Import-Module Pester
 Invoke-PesterTests -TestFile "PowerShellModules" -TestName "PowerShellModules"

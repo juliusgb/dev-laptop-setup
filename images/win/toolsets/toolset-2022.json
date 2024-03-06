@@ -5,7 +5,6 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "2.7",
                 "3.0",
                 "3.1"
             ],
@@ -20,7 +19,9 @@
                 "3.7.*",
                 "3.8.*",
                 "3.9.*",
-                "3.10.*"
+                "3.10.*",
+                "3.11.*",
+                "3.12.*"
             ],
             "default": "3.9.*"
         },
@@ -33,7 +34,20 @@
                 "3.7.*",
                 "3.8.*",
                 "3.9.*",
-                "3.10.*"
+                "3.10.*",
+                "3.11.*",
+                "3.12.*"
+            ]
+        },
+        {
+            "name": "PyPy",
+            "arch": "x86",
+            "platform" : "win64",
+            "versions": [
+                "2.7",
+                "3.7",
+                "3.9",
+                "3.10"
             ]
         },
         {
@@ -42,9 +56,9 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "12.*",
-                "14.*",
-                "16.*"
+                "16.*",
+                "18.*",
+                "20.*"
             ]
         },
         {
@@ -53,11 +67,11 @@
             "arch": "x64",
             "platform" : "win32",
             "versions": [
-                "1.16.*",
-                "1.17.*",
-                "1.18.*"
+                "1.20.*",
+                "1.21.*",
+                "1.22.*"
             ],
-            "default": "1.17.*"
+            "default": "1.21.*"
         }
     ],
     "powershellModules": [
@@ -71,20 +85,11 @@
     ],
     "java": {
         "default": "11",
-        "default_vendor": "Temurin-Hotspot",
-        "vendors": [
-            {
-                "name": "Temurin-Hotspot",
-                "versions": [ "8", "11", "17" ]
-            },
-            {
-                "name": "Adopt",
-                "versions": [ "8", "11"]
-            }
-        ]
+        "versions": [ "8", "11", "17", "21"]
     },
     "mingw": {
-        "version": "11.2.0.07112021"
+        "version": "12.2.0",
+        "runtime": "ucrt"
     },
     "MsysPackages": {
         "msys2": [],
@@ -101,7 +106,11 @@
             "mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2022",
             "mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2022",
             "mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2022"
-        ]
+        ],
+        "components": {
+            "docker": "24.0.7",
+            "compose": "2.23.3"
+        }
     },
     "pipx": [
         {
@@ -143,17 +152,31 @@
             {
                 "name": "cmake.install",
                 "args": [ "--installargs", "ADD_CMAKE_TO_PATH=\"User\"" ]
-            }
+            },
+          { "name": "imagemagick" }
         ]
     },
     "node": {
-        "default": "16"
+        "default": "18"
+    },
+    "maven": {
+      "version": "3.8"
+    },
+    "mysql": {
+      "version": "8.0",
+      "signature": "DD34D7C71F160972DE0CE25B695A0D6A9C95BD91"
     },
     "postgresql": {
-        "version": "14"
+        "version": "14",
+        "signature": "698BA51AA27CC31282AACA5055E4B9190BC6C0E9"
     },
     "kotlin": {
-        "version": "latest",
-        "binary_name": "kotlin-compiler"
+        "version": "latest"
+    },
+    "openssl": {
+      "version": "1.1.1"
+    },
+    "pwsh": {
+      "version": "7.4"
     }
 }

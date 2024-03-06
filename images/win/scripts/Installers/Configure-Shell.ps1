@@ -13,10 +13,15 @@ C:\opt\msys2\usr\bin\bash.exe -leo pipefail %*
 '@ | Out-File -FilePath "$shellPath\msys2bash.cmd" -Encoding ascii
 
 # gitbash <--> C:\Program Files\Git\bin\bash.exe
-New-Item -ItemType SymbolicLink -Path "$shellPath\gitbash.exe" -Target "$env:ProgramFiles\Git\bin\bash.exe" | Out-Null
+# CUSTOM
+if (Test-Path "$shellPath\gitbash.exe") {
+    Write-Host "Symlink "$shellPath\gitbash.exe" already Exists"
+} else {
+    New-Item -ItemType SymbolicLink -Path "$shellPath\gitbash.exe" -Target "$env:ProgramFiles\Git\bin\bash.exe" | Out-Null
+}
 
 # WSL is available on Windows Server 2019 and Windows Server 2022
-if (-not (Test-IsWin16) -or (-not (Test-IsWinHome)))
+if (-not (Test-IsWinHome))
 {
     # wslbash <--> C:\Windows\System32\bash.exe
     New-Item -ItemType SymbolicLink -Path "$shellPath\wslbash.exe" -Target "$env:SystemRoot\System32\bash.exe" | Out-Null
