@@ -7,8 +7,7 @@ The list of tools are <https://github.com/juliusgb/dev-laptop-setup/blob/main/im
 That's a subset of the tools that Microsoft installs on [its virtual machines](https://github.com/actions/runner-images) on which GitHub Actions run.
 I wanted something similar, i.e., open a shell, execute commands to experiment without having first to worry about installing and configuring the tools/SDKs/Runtimes. That worry comes later.
 
-I'm using release [`Windows Server 2022 (release win22/20240225.2)`](https://github.
-com/actions/runner-images/releases/tag/win22%2F20240225.2).
+I'm using release [`Windows Server 2022 (release win22/20240225.2)`](https://github.com/actions/runner-images/releases/tag/win22%2F20240225.2).
 But I've removed server-specific settings and tools, such as [`sbt`](https://www.scala-sbt.org/), that I'm not likely to use.
 If I need the tool, I'll add the relevant `Install-*` script and corresponding [`Pester`](https://pester.dev/) tests to the repo.
 
@@ -89,8 +88,7 @@ Because of excluded tooling, customized installers, I've added the `-ish` suffix
 
 ## Upgrading
 
-The current version of this repo corresponds to <https://github.
-com/actions/runner-images/releases/tag/win22%2F20240225.2>.
+The current version of this repo corresponds to <https://github.com/actions/runner-images/releases/tag/win22%2F20240225.2>.
 
 To upgrade/update this repo to a specific released tag, I run the following manually:
 
