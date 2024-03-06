@@ -50,9 +50,24 @@ Describe "Pipx" {
 }
 
 Describe "Kotlin" {
-    $kotlinPackages =  @("kapt", "kotlin", "kotlinc", "kotlin-dce-js", "kotlinc-js", "kotlinc-jvm")
+    $kotlinPackages = @("kapt", "kotlin", "kotlinc", "kotlin-dce-js", "kotlinc-jvm")
 
-    It "<toolName> is available" -TestCases ($kotlinPackages | ForEach-Object { @{ toolName = $_ } })  {
+    It "<toolName> is available" -TestCases ($kotlinPackages | ForEach-Object { @{ toolName = $_ } }) {
         "$toolName -version" | Should -ReturnZeroExitCode
+    }
+}
+
+Describe "OpenSSL" {
+    It "OpenSSL Version" {
+        $OpenSSLVersion = (Get-ToolsetContent).openssl.version
+        openssl version | Should -BeLike "* ${OpenSSLVersion}*"
+    }
+
+    It "OpenSSL Path" {
+        (Get-Command openssl).Source -eq (Join-Path ${env:ProgramFiles} 'OpenSSL\bin\openssl.exe') | Should -Be $true
+    }
+
+    It "OpenSSL Full package" {
+        Join-Path ${env:ProgramFiles} 'OpenSSL\include' | Should -Exist
     }
 }

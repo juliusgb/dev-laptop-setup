@@ -5,7 +5,7 @@ if (Get-ChildItem WSMan:\localhost\Listener) {
 else {
 	Write-Output "Enabling PS Remoting without checking Network profile."
 	Enable-PSRemoting -SkipNetworkProfileCheck -Force
-}	
+}
 # configure HTTPS for WinRM, you first need to create an SSL certificate on a computer you want to connect to.
 # https://docs.microsoft.com/en-us/powershell/module/pki/new-selfsignedcertificate?view=windowsserver2022-ps
 $hostName = $env:COMPUTERNAME
@@ -51,18 +51,17 @@ Get-ChildItem -Path "Cert:\LocalMachine\root" | Where-Object Issuer -eq "CN=$hos
 
 # manual checks
 #  1. check that self-signed cert was saved locally
-#    - on start, search Certificate -> click on pop up. 
-#    - top level certificat icon should show "Certificate - Local Computer" 
+#    - on start, search Certificate -> click on pop up.
+#    - top level certificat icon should show "Certificate - Local Computer"
 #    - click Own Certificates -> Certificates -> One should be in there
 #  2. check that cert was imported in root store
-#    - on start, type regedit -> click on pop up. 
+#    - on start, type regedit -> click on pop up.
 #    - navigate to HKEY_LOCAL_MACHINE\Software\Microsoft\SystemCertificates\ROOT\Certificates
 #  3. check that able to manually log into the machine using winrm
 #    - open another powershell console and test that you can log into localhost via winrm
 #    - $SessionOption = New-PSSessionOption -SkipCNCheck
-#    - Enter-PSSession -Computername LAPTOP-Name -UseSSL -Credential juliusg -SessionOption $SessionOption
+#    - Enter-PSSession -Computername $env:COMPUTERNAME -UseSSL -Credential juliusg -SessionOption $SessionOption
 
 # open another powershell console
 # run packer
 # C:\opt\Packer\packer_1.8.2\packer.exe build -var winrm-username=ab -var winrm-password=yz template.pkr.hcl
-	

@@ -18,6 +18,7 @@ Write-Host "Clean up various directories"
 }
 
 # Clean yarn and npm cache
+# CUSTOM: manually ran these
 cmd /c "yarn cache clean 2>&1" | Out-Null
 if ($LASTEXITCODE -ne 0) {
     throw "Failed to clean yarn cache"
@@ -28,4 +29,4 @@ if ($LASTEXITCODE -ne 0) {
     throw "Failed to clean npm cache"
 }
 
-Write-Host "Finalize-VM.ps1 - completed"
+Write-Host "Configure-System.ps1 - completed"

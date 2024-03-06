@@ -4,74 +4,56 @@
 ##  Desc:  Configure Toolset
 ################################################################################
 
-Function Set-DefaultVariables
-{
-    param
-    (
-        [Parameter(Mandatory=$true)]
-        [object] $EnvVars,
-        [Parameter(Mandatory=$true)]
-        [string] $ToolVersionPath
-    )
-
-    $templates = $EnvVars.pathTemplates
-    foreach ($template in $templates)
-    {
-        $toolSystemPath = $template -f $ToolVersionPath
-        Add-MachinePathItem -PathItem $toolSystemPath | Out-Null
-    }
-
-    if (-not ([string]::IsNullOrEmpty($EnvVars.defaultVariable)))
-    {
-        setx $toolEnvVars.defaultVariable $ToolVersionPath /M | Out-Null
-    }
-}
-
-# Define executables for cached tools
-$toolsEnvironmentVariables = @{
+$toolEnvConfigs = @{
     Python = @{
         pathTemplates = @(
-            "{0}",
-            "{0}\Scripts"
+        "{0}"
+        "{0}\Scripts"
         )
     }
-    go = @{
-        pathTemplates = @(
-            "{0}\bin"
+    go     = @{
+        pathTemplates  = @(
+        "{0}\bin"
         )
-        variableTemplate = "GOROOT_{0}_{1}_X64"
+        envVarTemplate = "GOROOT_{0}_{1}_X64"
     }
 }
 
-$toolsToConfigure = @("Python", "Go")
-$tools = Get-ToolsetContent | Select-Object -ExpandProperty toolcache `
-                            | Where-Object { $toolsToConfigure -contains $_.name }
+$tools = Get-ToolsetContent `
+| Select-Object -ExpandProperty toolcache `
+| Where-Object { $toolEnvConfigs.Keys -contains $_.name }
 
 Write-Host "Configure toolset tools environment..."
-foreach ($tool in $tools)
-{
-    $toolEnvVars = $toolsEnvironmentVariables[$tool.name]
+foreach ($tool in $tools) {
+    $toolEnvConfig = $toolEnvConfigs[$tool.name]
 
-    if (-not ([string]::IsNullOrEmpty($toolEnvVars.variableTemplate)))
-    {
-        foreach ($version in $tool.versions)
-        {
+    if (-not ([string]::IsNullOrEmpty($toolEnvConfig.envVarTemplate))) {
+        foreach ($version in $tool.versions) {
             Write-Host "Set $($tool.name) $version environment variable..."
 
-            $foundVersionArchPath = Get-ToolsetToolFullPath -Name $tool.name -Version $version -Arch $tool.arch
-            $envName = $toolEnvVars.variableTemplate -f $version.Split(".")
+            $foundVersionArchPath = Get-TCToolVersionPath -Name $tool.name -Version $version -Arch $tool.arch
+            $envName = $toolEnvConfig.envVarTemplate -f $version.Split(".")
 
-            setx $envName $foundVersionArchPath /M | Out-Null
+            Write-Host "Set $envName to $foundVersionArchPath"
+            [Environment]::SetEnvironmentVariable($envName, $foundVersionArchPath, "Machine")
         }
     }
 
-    if (-not ([string]::IsNullOrEmpty($tool.default)))
-    {
+    if (-not ([string]::IsNullOrEmpty($tool.default))) {
         Write-Host "Use $($tool.name) $($tool.default) as a system $($tool.name)..."
 
-        $toolVersionPath = Get-ToolsetToolFullPath -Name $tool.name -Version $tool.default -Arch $tool.arch
+        $toolVersionPath = Get-TCToolVersionPath -Name $tool.name -Version $tool.default -Arch $tool.arch
 
-        Set-DefaultVariables -ToolVersionPath $toolVersionPath -EnvVars $toolEnvVars
+        foreach ($template in $toolEnvConfig.pathTemplates) {
+            $toolSystemPath = $template -f $toolVersionPath
+            Write-Host "Add $toolSystemPath to system PATH..."
+            Add-MachinePathItem -PathItem $toolSystemPath | Out-Null
+        }
+
+        if (-not ([string]::IsNullOrEmpty($tool.defaultVariable))) {
+            Write-Host "Set $($tool.name) $($tool.default) $($tool.defaultVariable) environment variable..."
+            [Environment]::SetEnvironmentVariable($tool.defaultVariable, $toolVersionPath, "Machine")
+        }
     }
 }
 

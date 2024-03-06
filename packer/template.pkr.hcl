@@ -44,7 +44,7 @@ variable "opt_dir" {
 
 variable "repo_dir" {
 	type = string
-	default = "C:\\dev-work\\dev-laptop-windows"
+	default = "C:\\dev-work\\dev-laptop-setup"
 }
 
 source "null" basic-example {
@@ -66,13 +66,18 @@ build {
 
   provisioner "file" {
     destination = "${var.helper_scripts_dir}"
-	source = "./images/win/scripts/ImageHelpers"
+		source = "./images/win/scripts/ImageHelpers"
   }
 
   provisioner "file" {
     destination = "${var.image_folder}"
 		source = "./images/win/scripts/SoftwareReport"
   }
+
+	provisioner "file" {
+		destination = "${var.image_folder}\\SoftwareReport"
+		source      = "./helpers/software-report-base"
+	}
 
   provisioner "file" {
     destination = "${var.image_folder}"
@@ -89,7 +94,7 @@ build {
 		scripts          = [
 			"./images/win/scripts/Installers/Install-PowerShellModules.ps1",
 			"./images/win/scripts/Installers/Install-WindowsFeatures.ps1",
-			"./images/win/scripts/Installers/Install-Choco.ps1",
+			"./images/win/scripts/Installers/Install-Chocolatey.ps1",
 			"./images/win/scripts/Installers/Initialize-VM.ps1",
 			"./images/win/scripts/Installers/Update-DotnetTLS.ps1"
 		]
@@ -104,9 +109,15 @@ build {
 
 	provisioner "powershell" {
 		execution_policy = "unrestricted"
+		environment_vars = [
+			"IMAGE_FOLDER=${var.image_folder}"
+		]
 		scripts          = [
+			"./images/win/scripts/Installers/Install-Docker.ps1",
+			"./images/win/scripts/Installers/Install-DockerWinCred.ps1",
+			"./images/win/scripts/Installers/Install-DockerCompose.ps1",
 			"./images/win/scripts/Installers/Install-PowershellCore.ps1",
-			"./images/win/scripts/Installers/Install-CommonUtils.ps1"
+			"./images/win/scripts/Installers/Install-ChocolateyPackages.ps1"
 		]
 	}
 
@@ -119,12 +130,14 @@ build {
 
 	provisioner "powershell" {
 		environment_vars = [
-			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}",
+			"IMAGE_FOLDER=${var.image_folder}"
 		]
 		execution_policy = "unrestricted"
 		scripts          = [
 			"./images/win/scripts/Installers/Install-JavaTools.ps1",
-			"./images/win/scripts/Installers/Install-Kotlin.ps1"
+			"./images/win/scripts/Installers/Install-Kotlin.ps1",
+			"./images/win/scripts/Installers/Install-OpenSSL.ps1"
 		]
 	}
 
@@ -135,23 +148,24 @@ build {
 
 	provisioner "powershell" {
 		environment_vars = [
-			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}",
+			"IMAGE_FOLDER=${var.image_folder}"
 		]
 		execution_policy = "unrestricted"
 		scripts          = [
 			"./images/win/scripts/Installers/Install-Ruby.ps1",
-#			"./images/win/scripts/Installers/Install-PyPy.ps1", # doesn't create Scripts dir for py version 3.8 and 3.9
+			# doesn't create Scripts dir for py version 3.8, so removed 3.8 from toolset-2022.json
+			"./images/win/scripts/Installers/Install-PyPy.ps1",
       "./images/win/scripts/Installers/Install-Toolset.ps1",
       "./images/win/scripts/Installers/Configure-Toolset.ps1",
-      "./images/win/scripts/Installers/Install-NodeLts.ps1",
+      "./images/win/scripts/Installers/Install-NodeJS.ps1",
 			"./images/win/scripts/Installers/Install-Pipx.ps1",
-      "./images/win/scripts/Installers/Install-PipxPackages.ps1",
-				"./images/win/scripts/Installers/Install-Git.ps1"
+			"./images/win/scripts/Installers/Install-Git.ps1",
 			"./images/win/scripts/Installers/Install-Apache.ps1",
       "./images/win/scripts/Installers/Install-Nginx.ps1",
 			# required for haskell, building ruby gem native extensions (for jekyll)
 			"./images/win/scripts/Installers/Install-Msys2.ps1",
-			"./images/win/scripts/Installers/Install-AWS.ps1",
+			"./images/win/scripts/Installers/Install-AWSTools.ps1",
 			"./images/win/scripts/Installers/Install-Mingw64.ps1",
 			"./images/win/scripts/Installers/Install-Miniconda.ps1",
 			"./images/win/scripts/Installers/Install-PostgreSQL.ps1",
@@ -178,7 +192,8 @@ build {
 
 	provisioner "powershell" {
 		environment_vars = [
-			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}",
+			"IMAGE_FOLDER=${var.image_folder}"
 		]
 		execution_policy = "unrestricted"
 		scripts          = [
@@ -193,24 +208,35 @@ build {
 	provisioner "powershell" {
 		environment_vars = [
 			"IMAGE_VERSION=${var.image_version}",
-			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}"
+			"AGENT_TOOLSDIRECTORY=${var.agent_tools_dir}",
+			"IMAGE_FOLDER=${var.image_folder}"
 		]
-		inline = ["pwsh -File '${var.image_folder}\\SoftwareReport\\SoftwareReport.Generator.ps1'"]
+		inline = ["pwsh -File '${var.image_folder}\\SoftwareReport\\Generate-SoftwareReport.ps1'"]
   }
 
-	provisioner "powershell" {
-		inline = ["if (-not (Test-Path ${var.opt_dir}\\InstalledSoftware.md)) { throw '${var.opt_dir}\\InstalledSoftware.md not found' }"]
-  }
 
 	provisioner "powershell" {
-		inline = ["Copy-Item -Force ${var.opt_dir}\\InstalledSoftware.md -Destination ${var.repo_dir}\\images\\win\\Windows2022ish-Readme.md"]
+		inline = ["if (-not (Test-Path ${var.opt_dir}\\software-report.md)) { throw '${var.opt_dir}\\software-report.md not found' }"]
   }
 
-	provisioner "powershell" {
-		execution_policy = "unrestricted"
-		scripts          = [
-			"./images/win/scripts/Installers/Finalize-VM.ps1"
-		]
+	provisioner "file" {
+		destination = "${var.repo_dir}\\images\\win\\Windows2022ish-Readme.md"
+		direction   = "download"
+		source      = "C:\\opt\\software-report.md"
 	}
+
+	provisioner "file" {
+		destination = "${var.repo_dir}\\images\\win\\software-report.json"
+		direction   = "download"
+		source      = "C:\\opt\\software-report.json"
+	}
+
+	# Run manually outside of packer
+#	provisioner "powershell" {
+#		execution_policy = "unrestricted"
+#		scripts          = [
+#			"./images/win/scripts/Installers/Configure-System.ps1"
+#		]
+#	}
 
 }

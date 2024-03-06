@@ -1,3 +1,8 @@
+####################################################################################
+##  File:  Install-WindowsFeatures.ps1
+##  Desc:  Install Windows Features
+####################################################################################
+
 $windowsFeatures = (Get-ToolsetContent).windowsFeatures
 
 foreach ($feature in $windowsFeatures) {
@@ -8,12 +13,12 @@ foreach ($feature in $windowsFeatures) {
         $resultSuccess = $?
     } else {
         Write-Host "Activating Windows Feature '$($feature.name)'..."
-        $Arguments = @{
-            Name = $feature.name
-            IncludeAllSubFeature = [System.Convert]::ToBoolean($feature.includeAllSubFeatures)
+        $arguments = @{
+            Name                   = $feature.name
+            IncludeAllSubFeature   = [System.Convert]::ToBoolean($feature.includeAllSubFeatures)
             IncludeManagementTools = [System.Convert]::ToBoolean($feature.includeManagementTools)
         }
-        $result = Install-WindowsFeature @Arguments
+        $result = Install-WindowsFeature @arguments
 
         $resultSuccess = $result.Success
     }
